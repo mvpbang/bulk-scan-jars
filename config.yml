@@ -1,0 +1,20 @@
+# jar匹配类型、jar名字和版本的对应关系,坐标必须是数字 x.y.z
+
+#
+base:
+  wardir: "d:\\gaga-dev"
+  result: "d:\\tmp"
+  exts:
+    - ".war"
+    - ".ear"
+    - ".jar"
+
+# 相等匹配
+eq:
+  - BondeGate:2.1.28
+  - accessors-smart:1.4.9
+
+# 大于等于匹配
+le:
+  - fastjson:1.2.84
+  - zookeeper:4.4.14

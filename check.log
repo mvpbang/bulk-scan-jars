@@ -1,0 +1,4 @@
+2023/08/03 20:26:20 compare_ver.go:23: 大于等于判断: d:\gaga-dev\hgzx-web.war WEB-INF/lib/fastjson-1.2.83.jar fastjson:1.2.83 不大于等于 fastjson:1.2.84
+2023/08/03 20:26:20 compare_ver.go:23: 大于等于判断: d:\gaga-dev\hgzx-web.war WEB-INF/lib/zookeeper-3.4.14.jar zookeeper:3.4.14 不大于等于 zookeeper:4.4.14
+2023/08/03 20:26:20 compare_ver.go:12: 相等判断: d:\gaga-dev\hgzx-web.war WEB-INF/lib/accessors-smart-2.4.9.jar accessors-smart:2.4.9 不等于 accessors-smart:1.4.9
+2023/08/03 20:26:20 compare_ver.go:12: 相等判断: d:\gaga-dev\hgzx-web.war WEB-INF/lib/BondeGate-2.1.29-SNAPSHOT.jar BondeGate:2.1.29 不等于 BondeGate:2.1.28
