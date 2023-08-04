@@ -14,7 +14,6 @@ type Config struct {
 
 type Base struct {
 	WarDir string   `yml:"wardir"`
-	Result string   `yml:"result"`
 	Exts   []string `yml:"exts"`
 }
 

@@ -3,7 +3,6 @@
 #
 base:
   wardir: "d:\\gaga-dev"
-  result: "d:\\tmp"
   exts:
     - ".war"
     - ".ear"
