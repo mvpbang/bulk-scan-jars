@@ -22,7 +22,6 @@ func FindFiles(config Config) []string {
 		return nil
 	})
 
-	//遍历中，存在异常则抛出
 	if err != nil {
 		log.Fatalln(err)
 	}

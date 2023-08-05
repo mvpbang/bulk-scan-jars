@@ -8,11 +8,12 @@ import (
 )
 
 func init() {
-	logFile2, err := os.OpenFile(".//check.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
+	logfile, err := os.OpenFile(".//check.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
 	if err != nil {
 		log.Panicln(err)
 	}
-	mw := io.MultiWriter(os.Stdout, logFile2)
+	// 多写(console、file)
+	mw := io.MultiWriter(os.Stdout, logfile)
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	log.SetOutput(mw)
 }
@@ -20,13 +21,13 @@ func init() {
 func main() {
 	var config utils.Config
 
-	//读取配置反序列化yml
+	// 读取配置
 	utils.ReadConfig(&config)
-	//log.Println(config)
 
+	// 符合后缀的文件
 	files := utils.FindFiles(config)
 
-	// 记录war、jar、ear 和对应jar的关系
+	// 遍历比较
 	for _, file := range files {
 		filejar := utils.ViewFiles(file)
 		jarinfo := utils.ExtractNameVer(filejar)

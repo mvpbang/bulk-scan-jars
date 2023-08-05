@@ -8,18 +8,9 @@ import (
 
 func ExtractNameVer(filejar FileJar) []JarInfo {
 
-	//func ExtractNameVer(jarpath string) JarInfo {
-	//jarPath := "WEB-INF/lib/BondeReverseDesensitize-0.0.25-SNAPSHOT.jar"
-	//jarPath := "WEB-INF/lib/nacos-spring-context-0.0.2.jar"
-	//jarPath := []string{
-	//	"WEB-INF/lib/nacos-spring-context-0.0.2.jar",
-	//	"WEB-INF/lib/BondeReverseDesensitize-0.0.25-SNAPSHOT.jar",
-	//	"WEB-INF/lib/nacos-spring-context-0.0.2-20230718-SNAPSHOT.jar",
-	//	"WEB-INF/lib/x-spring-context1-0.0.2-20230718-SNAPSHOT.jar",
-	//}
-
 	var jarinfo JarInfo
-	var jarinfos = make([]JarInfo, 0)
+	//var jarinfos = make([]JarInfo, 0)
+	var jarinfos []JarInfo
 	var rn, rv string
 
 	// 正则提取规则
@@ -38,31 +29,26 @@ func ExtractNameVer(filejar FileJar) []JarInfo {
 		rverv := rver.FindStringSubmatch(rjarv[1])
 
 		//log.Println(rjarv, rverv)
+		// 对特殊jar提取名字 + 版本 异常处理
 		if len(rverv) == 0 || len(rnamev) == 0 {
-			log.Println("警告警告: ", filepath, rjarv, rnamev, rverv)
+			log.Printf("警告警告: %v,%v,%v,%v,%v", filejar.FilePath, filepath, rjarv, rnamev, rverv)
 			rn = "gaga"
 			rv = "9.9.9"
 		} else {
 			rv = strings.TrimLeft(rverv[0], "-")
 			rn = rnamev[1]
 		}
+
 		jarinfo = JarInfo{
 			ParPath: filejar.FilePath,
 			JarPath: filepath,
 			Name:    rn,
 			Ver:     rv,
 		}
+
 		//log.Println("+++", jarinfo)
 		jarinfos = append(jarinfos, jarinfo)
-
-		//log.Println("+++++", jarinfo[i])
 	}
 
-	/*	for _, jarpath := range jarPath {
-		rjarv := rjar.FindStringSubmatch(jarpath)
-		rnamev := rname.FindStringSubmatch(rjarv[1])
-		rverv := rver.FindStringSubmatch(rjarv[1])
-		log.Println(rnamev[1], rverv)
-	}*/
 	return jarinfos
 }

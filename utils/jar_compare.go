@@ -5,7 +5,8 @@ import (
 	"strings"
 )
 
-func comareEq(config Config, jarinfo JarInfo) {
+func comareEq(config Config, jarinfo JarInfo, ch chan int) {
+	// 迭代比较
 	for _, eqjar := range config.Eq {
 		if jarinfo.Name == strings.Split(eqjar, ":")[0] {
 			if jarinfo.Ver != strings.Split(eqjar, ":")[1] {
@@ -13,9 +14,11 @@ func comareEq(config Config, jarinfo JarInfo) {
 			}
 		}
 	}
+
+	ch <- 1
 }
 
-func comareLe(config Config, jarinfo JarInfo) {
+func comareLe(config Config, jarinfo JarInfo, ch chan int) {
 	for _, eqjar := range config.Le {
 		if jarinfo.Name == strings.Split(eqjar, ":")[0] {
 			//log.Println("+++++", jarinfo)
@@ -24,12 +27,16 @@ func comareLe(config Config, jarinfo JarInfo) {
 			}
 		}
 	}
+	ch <- 1
 }
 
 // 比对坐标
 
 func CompareVer(config Config, jarinfo JarInfo) {
+	ch := make(chan int, 0)
 	//log.Println(jarinfo)
-	comareEq(config, jarinfo)
-	comareLe(config, jarinfo)
+	go comareEq(config, jarinfo, ch)
+	go comareLe(config, jarinfo, ch)
+	<-ch
+	<-ch
 }

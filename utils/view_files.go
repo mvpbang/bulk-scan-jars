@@ -6,15 +6,15 @@ import (
 	"path/filepath"
 )
 
-// 查看压缩文件，根据jar筛选出路径
+// 查看压缩文件，记录jar路径
 
 func ViewFiles(file string) FileJar {
 	// 存放jar
-	//var jars []string
-	jars := make([]string, 0)
-
+	//jars := make([]string, 0)
+	var jars []string
 	var filejar FileJar
 
+	// zip形式打开文件
 	zipFile, err := zip.OpenReader(file)
 	if err != nil {
 		log.Fatalln(err)
@@ -22,10 +22,8 @@ func ViewFiles(file string) FileJar {
 	defer zipFile.Close()
 
 	for _, f := range zipFile.File {
+		// 选出文件jar的路径
 		if !f.FileInfo().IsDir() {
-			//info := f.FileInfo().Name()
-			//log.Println(f.Name, info)
-			//log.Println(f.Name)
 			if filepath.Ext(f.Name) == ".jar" {
 				//log.Println(f.Name)
 				jars = append(jars, f.Name)
