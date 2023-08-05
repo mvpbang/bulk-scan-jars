@@ -6,17 +6,6 @@ import (
 	"os"
 )
 
-type Config struct {
-	Base *Base    `yml:"base"`
-	Eq   []string `yml:"eq"`
-	Le   []string `yml:"le"`
-}
-
-type Base struct {
-	WarDir string   `yml:"wardir"`
-	Exts   []string `yml:"exts"`
-}
-
 // ReadConfig 读取配置
 func ReadConfig(config *Config) {
 	// 读取yml
@@ -32,6 +21,4 @@ func ReadConfig(config *Config) {
 		log.Println(err)
 		return
 	}
-	//log.Println(config.Base.WarDir)
-	//log.Println(config)
 }

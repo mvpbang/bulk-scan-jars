@@ -6,13 +6,6 @@ import (
 	"path/filepath"
 )
 
-// 存储war、ear、jar 路径及查看包内jar
-
-type FileJar struct {
-	FilePath string
-	Jars     []string
-}
-
 // 查看压缩文件，根据jar筛选出路径
 
 func ViewFiles(file string) FileJar {

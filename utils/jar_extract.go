@@ -6,13 +6,6 @@ import (
 	"strings"
 )
 
-type JarInfo struct {
-	ParPath string
-	JarPath string
-	Name    string
-	Ver     string
-}
-
 func ExtractNameVer(filejar FileJar) []JarInfo {
 
 	//func ExtractNameVer(jarpath string) JarInfo {
@@ -29,6 +22,7 @@ func ExtractNameVer(filejar FileJar) []JarInfo {
 	var jarinfos = make([]JarInfo, 0)
 	var rn, rv string
 
+	// 正则提取规则
 	rJar := `.*/(?P<jarname>.*)`
 	rName := `^(?P<name>.*?)-\d`
 	//rVer := `\b(?:\d+\.?)+\-?\d+|\b\d`
