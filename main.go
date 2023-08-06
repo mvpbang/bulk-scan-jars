@@ -8,10 +8,28 @@ import (
 )
 
 func init() {
-	logfile, err := os.OpenFile(".//check.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
-	if err != nil {
-		log.Panicln(err)
+	var logfile *os.File
+	filename := ".//no_pass.txt"
+
+	// 文件不存在
+	if _, err := os.Stat(filename); err != nil && os.IsNotExist(err) {
+		logfile, err = os.OpenFile(filename, os.O_CREATE|os.O_WRONLY, 0644)
+		if err != nil {
+			log.Panicln(err)
+		}
+		logfile.WriteString("代码,判断类型,成果路径,jar路径,jar包,比较结果,jar包安全版本\n")
+	} else {
+		logfile, err = os.OpenFile(filename, os.O_WRONLY|os.O_APPEND, 0644)
+		if err != nil {
+			log.Panicln(err)
+		}
 	}
+
+	//logfile, err := os.OpenFile(filename, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
+	//if err != nil {
+	//	log.Panicln(err)
+	//}
+
 	// 多写(console、file)
 	mw := io.MultiWriter(os.Stdout, logfile)
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
@@ -19,6 +37,7 @@ func init() {
 }
 
 func main() {
+	//log.Println("嘎嘎")
 	var config utils.Config
 
 	// 读取配置

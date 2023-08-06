@@ -31,7 +31,7 @@ func ExtractNameVer(filejar FileJar) []JarInfo {
 		//log.Println(rjarv, rverv)
 		// 对特殊jar提取名字 + 版本 异常处理
 		if len(rverv) == 0 || len(rnamev) == 0 {
-			log.Printf("警告警告: %v,%v,%v,%v,%v", filejar.FilePath, filepath, rjarv, rnamev, rverv)
+			log.Printf(",警告警告,%v,%v,%v,%v,%v", filejar.FilePath, filepath, rjarv, rnamev, rverv)
 			rn = "gaga"
 			rv = "9.9.9"
 		} else {
