@@ -17,7 +17,8 @@ func init() {
 		if err != nil {
 			log.Panicln(err)
 		}
-		logfile.WriteString("代码,判断类型,成果路径,jar路径,jar包,比较结果,jar包安全版本\n")
+		headstr := "代码,判断类型,成果路径,jar路径,jar包,比较结果,jar包安全版本\n"
+		logfile.WriteString(headstr)
 	} else {
 		logfile, err = os.OpenFile(filename, os.O_WRONLY|os.O_APPEND, 0644)
 		if err != nil {
@@ -48,9 +49,14 @@ func main() {
 
 	// 遍历比较
 	for _, file := range files {
+		// 过滤jar后缀
 		filejar := utils.ViewFiles(file)
-		jarinfo := utils.ExtractNameVer(filejar)
+		// 再次过滤仅仅选出符合搜索的jar
+		fj := utils.EqualJarName(filejar, config)
+		// 提取jarname、jarver
+		jarinfo := utils.ExtractNameVer(fj)
 		for _, jf := range jarinfo {
+			// 判断比较
 			utils.CompareVer(config, jf)
 		}
 	}
